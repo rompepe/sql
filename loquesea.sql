@@ -9,9 +9,6 @@ CREATE Table usuarios(
 
 
 
-DROP Table usuarios;
-DROP  Table vehiculos;
-
 INSERT INTO usuarios(edad,nombres,apellidos,tipo_de_documento,cedula) 
 VALUES(18, 'Stefa', 'Medina', 'cedula', 13123213),
 (22, 'Carlos', 'Gonzalez', 'cedula', 23456789),
@@ -30,8 +27,12 @@ CREATE Table vehiculos(
     color VARCHAR(10),
     marca VARCHAR (10),
     modelo VARCHAR(10),
-    id_usuario INT(3)
+    id_usuario INT(3),
+
 )
+
+alter Table vehiculos ADD FOREIGN KEY (id_usuario) REFERENCES usuarios(id_users);
+
 
 INSERT INTO vehiculos (placa,color,marca,modelo,id_usuario)
  VALUES
@@ -48,4 +49,14 @@ INSERT INTO vehiculos (placa,color,marca,modelo,id_usuario)
 
 
 
-SELECT usuarios.id_users, usuarios.nombres, vehiculos.placa FROM usuarios INNER JOIN vehiculos WHERE usuarios.id_users = vehiculos.id_usuario AND vehiculos.placa = "abc987"
+SELECT  usuarios.edad, usuarios.id_users, usuarios.nombres, vehiculos.placa FROM usuarios INNER JOIN vehiculos WHERE usuarios.id_users = vehiculos.id_usuario AND vehiculos.placa = "mno345"
+
+
+DROP Table usuarios;
+DROP  Table vehiculos;
+
+ALTER Table vehiculos add id_hora INT(3)
+
+ALTER Table vehiculos ADD Foreign Key (id_hora) REFERENCES parquing(id_parquing)
+
+ALTER Table parquing ADD Foreign Key (id_vehiculo) REFERENCES vehiculos(id_car)
